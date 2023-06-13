@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        window.addEventListener("DOMContentLoaded", (event) => {
+            const outerDiv = document.getElementById('outer');
+            const innerDiv = document.getElementById('inner');
+            const button = document.getElementById('btn');
+
+            if (outerDiv) {
+                outerDiv.addEventListener('click', () => {
+                    console.log("Outer function called!")
+                }, true); // false = event bubbling , true - event capturing
+            }
+
+            if (innerDiv) {
+                innerDiv.addEventListener('click', () => {
+                    console.log("Inner function called")
+                }, true);  // false = event bubbling, true - event capturing
+            }
+            if (button) {
+                button.addEventListener('click', () => {
+                    console.log("Button function called!")
+                }, true);  // false = event bubbling = event will getg called from childern to parent 
+            }
+        });
+
+        // Event Bubbling - flow of events from inward to outward
+        // Button function called!
+        // Inner function called
+        // Outer function called!
+
+        // Event Capturing- flow of events from outward to inward
+        // Outer function called!
+        // Inner function called
+        // Button function called!
+
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="inner">
+            <button id="btn">Click her</button>
+        </div>
+    </div>
+</body>
+
+</html>
