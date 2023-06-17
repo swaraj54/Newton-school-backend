@@ -1,3 +1,3 @@
 const mathUtils = require('./add');
 
-console.log(mathUtils.add(2,3))
+console.log(mathaddUtils.add(2,3))
