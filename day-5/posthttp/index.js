@@ -9,8 +9,10 @@ const express = require('express');
 
 const app = express();
 
+// use - middleware 
 app.use(express.json()); // for parsing the data
 
+// post - you can send data from frontend to backend
 app.post('/registration', (req, res) => {
     // console.log(req.body);
     const { name, age } = req.body;

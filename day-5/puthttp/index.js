@@ -18,7 +18,7 @@ app.put("/user/:id", (req, res) => {
     if (!user) return res.json({ message: "User not found!" })
 
      // for now we are perforing task over array but lateron we'll perform only on mongodb..
-    user.name = name;
+    user.name = name; // re - assiging 
     user.email = email;
     console.log(user,"- user");
     return res.json({ message: "Updated data.", user })
