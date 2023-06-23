@@ -1,32 +1,51 @@
 import express from 'express';
 import morgan from 'morgan';
+import router from './all-routes/allRoutes.js'
 
 const app = express();
 
-app.use(express.json());
+// app.use(morgan('combined'))
 
-app.use(morgan('dev'))
+app.use(express.json())
 
 const myMiddleware = (req, res, next) => {
-    console.log('This is a custom middleware');
-    next();
-};
-app.use(myMiddleware);
+    // can perform tasks here 
+    console.log("Inside custom middleware");
+    next()
+}
+app.use(myMiddleware)
+// now the parsing mechnism is applicable for every request
 
+app.use('/api/v1', router)
+
+
+
+// app.use((req, res, next) => {
+//     console.log("Inside middleware");
+//     if (false) {
+//         return res.send("Returing from middleware!!")
+//     } else {
+//         next();
+//     }
+// })
 
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-});
-
-
-app.use((req, res, next) => {
-    // console.log("Logged inside the middleware");
-    // here we'll perform some task and on bases of the
-    // we'll decide we nned trasfer user to next router or not 
-    // return res.send("REturn from middlwraew")
-    next();
+    if (err) {
+        return res.send(err)
+    } else {
+        next()
+    }
 })
+
+app.post('/get-data', (req, res) => {
+    try {
+        const { message } = req.body;
+        return res.send(message);
+    } catch (err) {
+        return res.send(err)
+    }
+})
+
 app.get('/', (req, res) => {
     res.send("Hello from server")
 })
