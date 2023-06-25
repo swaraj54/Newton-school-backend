@@ -3,8 +3,11 @@ import axios from 'axios';
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); // to prase data
 
+// CURD - > CREATE UPDATE READ DELETE
+
+// read
 app.get("/get-product", async (req, res) => {
     try {
         const response = await axios.get("https://fakestoreapi.com/products");
@@ -14,7 +17,7 @@ app.get("/get-product", async (req, res) => {
         return res.send(error)
     }
 })
-
+// read
 app.get('/get-single-product/:id', async (req, res) => {
     try {
         const data = req.params;
@@ -28,6 +31,7 @@ app.get('/get-single-product/:id', async (req, res) => {
     }
 })
 
+// create
 app.post('/create-product', async (req, res) => {
     try {
         const { title, price, description, category, image } = req.body;
@@ -46,6 +50,7 @@ app.post('/create-product', async (req, res) => {
     }
 });
 
+// update
 app.put('/update-product/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -61,6 +66,7 @@ app.put('/update-product/:id', async (req, res) => {
     }
 });
 
+// delete
 app.delete('/delete-product/:id', async (req, res) => {
     try {
         const { id } = req.params;
